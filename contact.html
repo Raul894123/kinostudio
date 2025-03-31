@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Контакты | DarkVision</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrapper">
+
+    <!-- Блок студии -->
+    <section class="studio-contact">
+  <div class="studio-inner">
+    <h2>Наша студия</h2>
+    <p><strong>📍 Адрес:</strong> Улица Белинского 46, Усть-Каменогорск, Казахстан</p>
+    <p><strong>📧 Email:</strong> fexza@ya.ru</p>
+    <p><strong>📞 Телефон:</strong> <a href="tel:+77715856038">+7 (771) 585 60 38</a></p>
+    <p><strong>📞 Телефон:</strong> <a href="tel:+77770657276">+7 (777) 065 72 76</a></p>
+
+    <div class="map-container">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2443.4259480164897!2d82.61434999999999!3d49.958371!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x42f0102381f5a49f%3A0xf2f88c688e15e57d!2z0YPQuy4g0JvQvtC70YzQvdC40LrQsCDQotCw0YLQsNC90LjRhtC60LDRjyDQvtCx0LsuLCAyMDAwMDAsINCU0L7QvdC-0LLQuNGH0L3QsNGPLCDQkNCy0YvQu9C40YbQsA!5e0!3m2!1sru!2skz!4v1711728448315!5m2!1sru!2skz" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+</section>
+
+
+    <!-- Блок формы -->
+    <main class="contact-section">
+      <h2>Связаться с нами</h2>
+      <form id="tg-form" class="email-form">
+        <input type="text" id="name" placeholder="Ваше имя" required>
+        <input type="email" id="email" placeholder="Ваша почта" required>
+        <textarea id="message" placeholder="Сообщение" required></textarea>
+        <button type="submit">Отправить</button>
+      </form>
+      <div id="status-message" style="text-align:center; margin-top:15px;"></div>
+    </main>
+
+    <!-- Футер -->
+    <footer class="cinema-footer">
+      <div class="footer-brand">
+        <h3>🎬 DarkVision Films</h3>
+        <p>Создаём кино, которое ощущается</p>
+      </div>
+      <p class="footer-copy">© 2025 DarkVision. Все права защищены.</p>
+    </footer>
+
+  </div>
+
+  <!-- Навигация (фиксированная) -->
+  <nav>
+    <ul>
+      <li><a href="index.html">Главная</a></li>
+      <li><a href="movies.html">Фильмы</a></li>
+      <li><a href="team.html">Команда</a></li>
+      <li><a href="contact.html">Контакты</a></li>
+    </ul>
+  </nav>
+
+  <!-- Скрипт Telegram -->
+  <script>
+    "use strict";
+    document.getElementById("tg-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      var name = document.getElementById("name").value;
+      var email = document.getElementById("email").value;
+      var message = document.getElementById("message").value;
+      var botToken = "7976146715:AAFYg1SPNNaga_3sr-5oaZZRZS5ZCwO9_kU";
+      var chatId = "5594253009";
+      var text = "📩 Новое сообщение с сайта:\n👤 Имя: " + name + "\n📧 Email: " + email + "\n📝 Сообщение: " + message;
+      var url = "https://api.telegram.org/bot" + botToken + "/sendMessage";
+
+      fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ chat_id: chatId, text: text })
+      }).then(function (response) {
+        document.getElementById("status-message").innerText =
+          response.ok ? "✅ Сообщение отправлено!" : "❌ Ошибка при отправке!";
+        if (response.ok) document.getElementById("tg-form").reset();
+      }).catch(function () {
+        document.getElementById("status-message").innerText = "⚠️ Не удалось подключиться к серверу.";
+      });
+    });
+  </script>
+</body>
+
+</html>

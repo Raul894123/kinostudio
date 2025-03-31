@@ -1,0 +1,347 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #111;
+  font-family: 'Segoe UI', sans-serif;
+  color: #f5f5f5;
+}
+
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+main {
+  flex: 1 0 auto;
+  padding-bottom: 80px;
+}
+
+/* ---------- НАВИГАЦИЯ ---------- */
+nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #111;
+  padding: 15px 0;
+  text-align: center;
+  z-index: 999;
+  box-shadow: none;
+  border-top: none;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+nav ul li a {
+  color: #f5f5f5;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: transparent;
+}
+
+nav ul li a:hover {
+  background-color: #00bcd4;
+  color: #000;
+}
+
+/* ---------- ПАРАЛЛАКС ---------- */
+.parallax {
+  background-image: url('../img/your-background.jpg');
+  height: calc(100vh - 180px);
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  pointer-events: none;
+  display: block;
+}
+
+.overlay {
+  position: relative;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.6);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 50px;
+}
+
+.overlay h1 {
+  font-size: 4em;
+  margin: 0;
+  animation: fadeUp 1s ease forwards;
+}
+
+.overlay p {
+  font-size: 1.5em;
+  animation: fadeUp 1s ease 0.3s forwards;
+}
+
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- КОНТЕНТНЫЕ БЛОКИ ---------- */
+.movies-container,
+.team-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  padding: 20px;
+}
+
+.movie-card,
+.team-member {
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  padding: 20px;
+  width: 320px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease;
+}
+
+.movie-card:hover,
+.team-member:hover {
+  transform: translateY(-5px);
+}
+
+.movie-card img,
+.team-member img {
+  width: 100%;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.movie-card h3,
+.team-member h3 {
+  margin-top: 0;
+  color: #00bcd4;
+}
+
+.movie-card video {
+  width: 100%;
+  margin: 10px 0;
+}
+
+/* ---------- КОНТАКТЫ ---------- */
+.contact-section {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  color: #f5f5f5;
+}
+
+.email-form,
+.contact-form {
+  max-width: 600px;
+  margin: 30px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  text-align: center;
+}
+
+.email-form input,
+.email-form textarea,
+.contact-form input,
+.contact-form textarea {
+  padding: 10px;
+  background-color: #222;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  width: 100%;
+}
+
+.email-form textarea,
+.contact-form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.email-form button,
+.contact-form button {
+  background-color: #00bcd4;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #000;
+  transition: background-color 0.3s ease;
+}
+
+.email-form button:hover,
+.contact-form button:hover {
+  background-color: #0097a7;
+}
+
+.map-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0, 188, 212, 0.2);
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 350px;
+  border: 0;
+  display: block;
+}
+
+.studio-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.studio-contact {
+  max-width: 800px;
+  margin: 60px auto;
+  padding: 30px;
+  background-color: #1a1a1a;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 188, 212, 0.15);
+  color: #f5f5f5;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.studio-contact h2 {
+  color: #00bcd4;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.studio-contact p {
+  margin: 10px 0;
+  font-size: 1.1em;
+text-align: center;
+}
+
+.studio-contact a {
+  color: #00bcd4;
+  text-decoration: none;
+}
+
+.studio-contact a:hover {
+  text-decoration: underline;
+}
+
+.map-container {
+  margin-top: 30px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0, 188, 212, 0.2);
+}
+
+/* ---------- ФУТЕР ---------- */
+.cinema-footer {
+  background-color: rgba(17, 17, 17, 0.6);
+  backdrop-filter: blur(5px);
+  padding: 40px 20px;
+  text-align: center;
+  color: #bbb;
+  font-size: 14px;
+  margin-top: 40px;
+  box-shadow: none;
+}
+
+.footer-brand h3 {
+  margin: 0;
+  color: #00bcd4;
+  font-size: 20px;
+}
+
+.footer-brand p {
+  margin: 5px 0 15px;
+  font-style: italic;
+  color: #888;
+}
+
+.footer-copy {
+  color: #666;
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+/* ---------- АНИМАЦИИ ---------- */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.fade-in.delay-1 { animation-delay: 0.2s; }
+.fade-in.delay-2 { animation-delay: 0.4s; }
+.fade-in.delay-3 { animation-delay: 0.6s; }
+.fade-in.delay-4 { animation-delay: 0.8s; }
+.fade-in.delay-5 { animation-delay: 1s; }
+.fade-in.delay-6 { animation-delay: 1.2s; }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+nav.nav-animated {
+  animation: navFade 1s ease-in-out forwards;
+}
+
+@keyframes navFade {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
