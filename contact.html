@@ -59,31 +59,55 @@
   </nav>
 
   <!-- Скрипт Telegram -->
-  <script>
-    "use strict";
-    document.getElementById("tg-form").addEventListener("submit", function (e) {
-      e.preventDefault();
-      var name = document.getElementById("name").value;
-      var email = document.getElementById("email").value;
-      var message = document.getElementById("message").value;
-      var botToken = "7976146715:AAFYg1SPNNaga_3sr-5oaZZRZS5ZCwO9_kU";
-      var chatId = "5594253009";
-      var text = "📩 Новое сообщение с сайта:\n👤 Имя: " + name + "\n📧 Email: " + email + "\n📝 Сообщение: " + message;
-      var url = "https://api.telegram.org/bot" + botToken + "/sendMessage";
+ <script>
+  "use strict";
+  document.getElementById("tg-form").addEventListener("submit", function (e) {
+    e.preventDefault();
 
-      fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ chat_id: chatId, text: text })
-      }).then(function (response) {
-        document.getElementById("status-message").innerText =
-          response.ok ? "✅ Сообщение отправлено!" : "❌ Ошибка при отправке!";
-        if (response.ok) document.getElementById("tg-form").reset();
-      }).catch(function () {
-        document.getElementById("status-message").innerText = "⚠️ Не удалось подключиться к серверу.";
-      });
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const message = document.getElementById("message").value.trim().toLowerCase();
+    const statusMessage = document.getElementById("status-message");
+
+    // 🔥 Список запрещённых слов (можешь дополнять)
+    const badWords = [
+      "хуй", "пизда", "блядь", "сука", "ебать", "гандон", "мудак", "сучка", "долбоеб",
+      "мудила", "выблядок", "чмо", "шалава", "уебок", "пидор", "пидорас"
+    ];
+
+    const hasBadWords = badWords.some(word => message.includes(word) || name.toLowerCase().includes(word));
+
+    if (hasBadWords) {
+      statusMessage.innerText = "🚫 Сообщение содержит нецензурные выражения. Пожалуйста, исправьте его.";
+      statusMessage.style.color = "#ff4e4e";
+      return;
+    }
+
+    const botToken = "7976146715:AAFYg1SPNNaga_3sr-5oaZZRZS5ZCwO9_kU";
+    const chatId = "5594253009";
+    const text = `📩 Новое сообщение с сайта:
+👤 Имя: ${name}
+📧 Email: ${email}
+📝 Сообщение: ${message}`;
+
+    const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+    fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ chat_id: chatId, text: text })
+    }).then(response => {
+      statusMessage.innerText = response.ok
+        ? "✅ Сообщение отправлено!"
+        : "❌ Ошибка при отправке!";
+      statusMessage.style.color = response.ok ? "#00cc88" : "#ff4e4e";
+      if (response.ok) document.getElementById("tg-form").reset();
+    }).catch(() => {
+      statusMessage.innerText = "⚠️ Не удалось подключиться к серверу.";
+      statusMessage.style.color = "#ff4e4e";
     });
-  </script>
+  });
+</script>
 </body>
 
 </html>
