@@ -20,6 +20,39 @@ main {
   padding-bottom: 80px;
 }
 
+.about-section {
+  background-color: #111;
+  color: #fff;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.about-container {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.about-section h2 {
+  font-size: 36px;
+  margin-bottom: 25px;
+  color: #00d4ff;
+}
+
+/* Анимация появления */
+.fade-in {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
 /* ---------- НАВИГАЦИЯ ---------- */
 nav {
   position: fixed;
