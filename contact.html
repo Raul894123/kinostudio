@@ -58,6 +58,7 @@
     </ul>
   </nav>
 
+<<<<<<< HEAD
   <!-- Скрипт Telegram -->
  <script>
   "use strict";
@@ -97,16 +98,69 @@
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ chat_id: chatId, text: text })
     }).then(response => {
+=======
+  <script>
+"use strict";
+
+let badWords = [];
+
+// Загружаем список плохих слов
+fetch("full_russian_swears.json")
+  .then(res => res.json())
+  .then(words => {
+    badWords = words.map(w => w.toLowerCase().trim());
+  })
+  .catch(() => console.error("⚠️ Не удалось загрузить список мата."));
+
+document.getElementById("tg-form").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const name = document.getElementById("name").value.trim().toLowerCase();
+  const email = document.getElementById("email").value.trim();
+  const message = document.getElementById("message").value.trim().toLowerCase();
+  const statusMessage = document.getElementById("status-message");
+
+  const hasBadWords = badWords.some(word =>
+    name.includes(word) || message.includes(word)
+  );
+
+  if (hasBadWords) {
+    statusMessage.innerText = "🚫 Сообщение содержит нецензурные выражения. Пожалуйста, исправьте его.";
+    statusMessage.style.color = "#ff4e4e";
+    return;
+  }
+
+  const botToken = "7976146715:AAFYg1SPNNaga_3sr-5oaZZRZS5ZCwO9_kU";
+  const chatId = "5594253009";
+  const text = `📩 Новое сообщение с сайта:\n👤 Имя: ${name}\n📧 Email: ${email}\n📝 Сообщение: ${message}`;
+  const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+  fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ chat_id: chatId, text: text })
+  })
+    .then(response => {
+>>>>>>> e96ef99 (Обновления с мака)
       statusMessage.innerText = response.ok
         ? "✅ Сообщение отправлено!"
         : "❌ Ошибка при отправке!";
       statusMessage.style.color = response.ok ? "#00cc88" : "#ff4e4e";
       if (response.ok) document.getElementById("tg-form").reset();
+<<<<<<< HEAD
     }).catch(() => {
       statusMessage.innerText = "⚠️ Не удалось подключиться к серверу.";
       statusMessage.style.color = "#ff4e4e";
     });
   });
+=======
+    })
+    .catch(() => {
+      statusMessage.innerText = "⚠️ Не удалось подключиться к серверу.";
+      statusMessage.style.color = "#ff4e4e";
+    });
+});
+>>>>>>> e96ef99 (Обновления с мака)
 </script>
 </body>
 
